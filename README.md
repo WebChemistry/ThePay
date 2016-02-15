@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/WebChemistry/ThePay.svg?branch=master)](https://travis-ci.org/WebChemistry/ThePay)
+
 ## Installation
 ```yaml
 extensions:
