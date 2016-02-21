@@ -77,15 +77,15 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 	}
 
 	public function testSignature() {
-		$this->assertTrue($this->getReceiver()->verify(FALSE));
-		$this->assertFalse($this->getReceiver(['signature' => 'xx'])->verify(FALSE));
+		$this->assertTrue($this->getReceiver()->verifySignature(FALSE));
+		$this->assertFalse($this->getReceiver(['signature' => 'xx'])->verifySignature(FALSE));
 
 		$this->tester->assertExceptionThrown('WebChemistry\ThePay\Exception', function () {
-			$this->getReceiver(['signature'])->verify();
+			$this->getReceiver(['signature'])->verifySignature();
 		});
 
 		$this->tester->assertExceptionThrown('WebChemistry\ThePay\Exception', function () {
-			$this->getReceiver(['accountId' => NULL])->verify();
+			$this->getReceiver(['accountId' => NULL])->verifySignature();
 		});
 	}
 
@@ -106,9 +106,9 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 		$receiver = $this->getReceiver([
 			'value' => 'string'
 		]);
-		$this->assertFalse($receiver->verify(FALSE));
+		$this->assertFalse($receiver->verifySignature(FALSE));
 		$this->tester->assertExceptionThrown('WebChemistry\ThePay\Exception', function () use ($receiver) {
-			$receiver->verify();
+			$receiver->verifySignature();
 		});
 	}
 

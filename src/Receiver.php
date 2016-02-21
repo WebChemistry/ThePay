@@ -55,7 +55,7 @@ class Receiver extends \TpReturnedPayment {
 	 * @throws Exception
 	 * @return bool
 	 */
-	public function verify($throwException = TRUE) {
+	public function verifySignature($throwException = TRUE) {
 		if ($this->error) {
 			if ($throwException) {
 				throw new Exception($this->error->getMessage(), $this->error->getCode());
@@ -64,7 +64,7 @@ class Receiver extends \TpReturnedPayment {
 			return FALSE;
 		}
 		try {
-			$this->verifySignature();
+			parent::verifySignature();
 		} catch (\TpInvalidSignatureException $e) {
 			if ($throwException) {
 				throw new Exception('Invalid signature.');
