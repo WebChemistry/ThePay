@@ -21,6 +21,9 @@ class ThePay {
 	/** @var Request */
 	private $request;
 
+	/** @var Api */
+	private $api;
+
 	/**
 	 * @param array $config
 	 * @param Request $request
@@ -43,6 +46,7 @@ class ThePay {
 		$this->config->merchantId = $config['merchantId'];
 		$this->config->password = $config['password'];
 		$this->request = $request;
+		$this->api = new Api($this->config);
 	}
 
 	/**
@@ -95,6 +99,13 @@ class ThePay {
 		$payment = new \TpPermanentPayment($this->config, $merchantData, $description, $returnUrl);
 
 		return \TpPermanentPaymentHelper::getPermanentPayment($payment);
+	}
+
+	/**
+	 * @return Api
+	 */
+	public function getApi() {
+		return $this->api;
 	}
 
 }
