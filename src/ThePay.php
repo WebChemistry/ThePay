@@ -71,4 +71,30 @@ class ThePay {
 		return new Sender($this->config, $price);
 	}
 
+	/**
+	 * @param string $merchantData
+	 * @param string $description
+	 * @param string $returnUrl
+	 * @return Permanent
+	 * @throws \TpException
+	 */
+	public function createPermanent($merchantData, $description, $returnUrl) {
+		$payment = new \TpPermanentPayment($this->config, $merchantData, $description, $returnUrl);
+
+		return new Permanent(\TpPermanentPaymentHelper::createPermanentPayment($payment));
+	}
+
+	/**
+	 * @param string $merchantData
+	 * @param string $description
+	 * @param string $returnUrl
+	 * @return Permanent
+	 * @throws \TpException
+	 */
+	public function getPermanent($merchantData, $description, $returnUrl) {
+		$payment = new \TpPermanentPayment($this->config, $merchantData, $description, $returnUrl);
+
+		return \TpPermanentPaymentHelper::getPermanentPayment($payment);
+	}
+
 }
