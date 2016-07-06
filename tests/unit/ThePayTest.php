@@ -10,8 +10,9 @@ class ThePayTest extends \Codeception\TestCase\Test {
 	}
 
 	public function testMethods() {
-		$this->assertInstanceOf('WebChemistry\ThePay\Sender', $this->thePay->createSender(500));
-		$this->assertInstanceOf('WebChemistry\ThePay\Receiver', $this->thePay->getReceiver());
+		$this->assertInstanceOf(\WebChemistry\ThePay\Sender::class, $this->thePay->createSender(500));
+		$this->assertInstanceOf(\WebChemistry\ThePay\Receiver::class, $this->thePay->getReceiver());
+		$this->assertInstanceOf(\WebChemistry\ThePay\Api::class, $this->thePay->getApi());
 
 		$this->assertNotSame($this->thePay->createSender(500.00), $this->thePay->createSender(500.00));
 		$this->assertSame($this->thePay->getReceiver(), $this->thePay->getReceiver());

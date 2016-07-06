@@ -18,7 +18,7 @@ class Permanent {
 	 * @return bool
 	 */
 	public function isOk() {
-		return !$this->response->getStatus();
+		return $this->response->getStatus() === TRUE;
 	}
 
 	/**
