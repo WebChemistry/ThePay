@@ -52,13 +52,13 @@ class Receiver extends \TpReturnedPayment {
 
 	/**
 	 * @param bool $throwException
-	 * @throws Exception
+	 * @throws ThePayException
 	 * @return bool
 	 */
 	public function verifySignature($throwException = TRUE) {
 		if ($this->error) {
 			if ($throwException) {
-				throw new Exception($this->error->getMessage(), $this->error->getCode());
+				throw new ThePayException($this->error->getMessage(), $this->error->getCode());
 			}
 
 			return FALSE;
@@ -67,14 +67,14 @@ class Receiver extends \TpReturnedPayment {
 			parent::verifySignature();
 		} catch (\TpInvalidSignatureException $e) {
 			if ($throwException) {
-				throw new Exception('Invalid signature.');
+				throw new ThePayException('Invalid signature.');
 			}
 
 			return FALSE;
 		}
 		if (!is_numeric(parent::getValue())) {
 			if ($throwException) {
-				throw new Exception('Price is not numeric.');
+				throw new ThePayException('Price is not numeric.');
 			}
 
 			return FALSE;
