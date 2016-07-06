@@ -9,7 +9,7 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 
 	/** @var array */
 	protected $params = [
-		'merchantId' => 1, 'accountId' => 1,
+		'merchantId' => 1, 'accountId' => 3,
 		'currency' => 'CZK', 'methodId' => 1, 'description' => '',
 		'merchantData' => '', 'status' => TpReturnedPayment::STATUS_OK,
 		'paymentId' => 1, 'ipRating' => '', 'isOffline' => TRUE,
@@ -33,7 +33,7 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 			$args['signature'] = $this->getCorrectSignature(array_merge([
 				'password' => 'my$up3rsecr3tp4$$word',
 				'merchantId' => 1,
-				'accountId' => 1
+				'accountId' => 3
 			],$args));
 		}
 		foreach ($args as $name => $value) {
@@ -79,11 +79,11 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 		$this->assertTrue($this->getReceiver()->verifySignature(FALSE));
 		$this->assertFalse($this->getReceiver(['signature' => 'xx'])->verifySignature(FALSE));
 
-		$this->tester->assertExceptionThrown('WebChemistry\ThePay\Exception', function () {
+		$this->tester->assertExceptionThrown(\WebChemistry\ThePay\ThePayException::class, function () {
 			$this->getReceiver(['signature'])->verifySignature();
 		});
 
-		$this->tester->assertExceptionThrown('WebChemistry\ThePay\Exception', function () {
+		$this->tester->assertExceptionThrown(\WebChemistry\ThePay\ThePayException::class, function () {
 			$this->getReceiver(['accountId' => NULL])->verifySignature();
 		});
 	}
@@ -106,7 +106,7 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 			'value' => 'string'
 		]);
 		$this->assertFalse($receiver->verifySignature(FALSE));
-		$this->tester->assertExceptionThrown('WebChemistry\ThePay\Exception', function () use ($receiver) {
+		$this->tester->assertExceptionThrown(\WebChemistry\ThePay\ThePayException::class, function () use ($receiver) {
 			$receiver->verifySignature();
 		});
 	}
