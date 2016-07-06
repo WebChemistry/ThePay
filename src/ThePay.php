@@ -6,6 +6,11 @@ use Nette\Http\Request;
 
 class ThePay {
 
+	const WSDL = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
+	const WSDL_API = 'https://www.thepay.cz/gate/api/data.wsdl';
+	const GATE = 'https://www.thepay.cz/gate/';
+	const NOTIFICATION_TEST = 'https://www.thepay.cz/demo-gate/testNotif.php';
+
 	/** @var \TpMerchantConfig */
 	private $config;
 
@@ -28,23 +33,26 @@ class ThePay {
 	 * @param array $config
 	 * @param Request $request
 	 */
-	public function __construct(array $config, Request $request = NULL) {
+	public function __construct(array $config = [], Request $request = NULL) {
 		$this->config = new \TpMerchantConfig;
-		$this->isTest = $config['accountId'] === 1 && $config['merchantId'] === 1;
-
-		if ($config['writer']) {
-			if (is_object($config['writer'])) {
-				$this->writer = $config['writer'];
-			} else {
-				$this->writer = new $config['writer'];
-			}
+		if (isset($config['password']) && !isset($config['dataApiPassword'])) {
+			$config['dataApiPassword'] = $config['password'];
+		}
+		foreach ($config as $name => $value) {
+			$this->config->$name = $value;
 		}
 
-		$this->config->accountId = $config['accountId'];
-		$this->config->gateUrl = $this->isTest ? $config['demoGateUrl'] : $config['gateUrl'];
-		$this->config->webServicesWsdl = $this->isTest ? $config['wsdlDemo'] : $config['wsdl'];
-		$this->config->merchantId = $config['merchantId'];
-		$this->config->password = $config['password'];
+		$this->isTest = $this->config->merchantId == 1;
+		if (!$this->isTest) {
+			$this->config->gateUrl = self::GATE;
+			$this->config->webServicesWsdl = self::WSDL;
+			$this->config->dataWebServicesWsdl = self::WSDL_API;
+		}
+
+		if (isset($config['writer'])) {
+			$this->writer = is_object($config['writer']) ? $config['writer'] : new $config['writer'];
+		}
+		
 		$this->request = $request;
 		$this->api = new Api($this->config);
 	}

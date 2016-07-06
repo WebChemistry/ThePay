@@ -11,12 +11,8 @@ class ThePayExtension extends CompilerExtension {
 	public $defaultValues = [
 		'merchantId' => 1,
 		'accountId' => 1,
-		'demoGateUrl' => 'https://www.thepay.cz/demo-gate/',
-		'gateUrl' => 'https://www.thepay.cz/gate/',
-		'wsdl' => 'https://www.thepay.cz/gate/api/gate-api.wsdl',
-		'wsdlDemo' => 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl',
-		'notificationTest' => 'https://www.thepay.cz/demo-gate/testNotif.php',
 		'password' => 'my$up3rsecr3tp4$$word',
+		'dataApiPassword' => 'my$up3rsecr3tp4$$word',
 		'writer' => NULL
 	];
 
