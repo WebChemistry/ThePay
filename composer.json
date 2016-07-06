@@ -1,12 +1,18 @@
 {
-  "name": "webchemistry/thepay",
-  "require-dev": {
-    "codeception/codeception": "^2.1",
-    "nette/http": "^2.3",
-    "tracy/tracy": "^2.3",
-    "nette/di": "^2.3"
-  },
-  "autoload": {
-    "classmap": ["src/", "lib/"]
-  }
+	"name": "webchemistry/thepay",
+	"require": {
+		"nette/http": "^2.3"
+	},
+	"require-dev": {
+		"codeception/codeception": "^2.1",
+		"nette/http": "^2.3",
+		"tracy/tracy": "^2.3",
+		"nette/di": "^2.3"
+	},
+	"autoload": {
+		"classmap": [
+			"src/",
+			"lib/"
+		]
+	}
 }
