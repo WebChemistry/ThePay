@@ -9,8 +9,7 @@ class SenderTest extends \Codeception\TestCase\Test {
 	protected $tester;
 
 	protected function _before() {
-		$extension = new \WebChemistry\ThePay\DI\ThePayExtension();
-		$this->thePay = new \WebChemistry\ThePay\ThePay($extension->defaultValues);
+		$this->thePay = new \WebChemistry\ThePay\ThePay();
 	}
 
 	public function testPrice() {

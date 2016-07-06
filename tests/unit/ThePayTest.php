@@ -6,17 +6,7 @@ class ThePayTest extends \Codeception\TestCase\Test {
 	protected $thePay;
 
 	protected function _before() {
-		$this->thePay = new \WebChemistry\ThePay\ThePay([
-			'merchantId' => 1,
-			'accountId' => 1,
-			'demoGateUrl' => 'https://www.thepay.cz/demo-gate/',
-			'gateUrl' => 'https://www.thepay.cz/gate/',
-			'wsdl' => 'https://www.thepay.cz/gate/api/api.wsdl',
-			'wsdlDemo' => 'https://www.thepay.cz/demo-gate/api/api-demo.wsdl',
-			'notificationTest' => 'https://www.thepay.cz/demo-gate/testNotif.php',
-			'password' => 'my$up3rsecr3tp4$$word',
-			'writer' => NULL
-		]);
+		$this->thePay = new \WebChemistry\ThePay\ThePay();
 	}
 
 	public function testMethods() {

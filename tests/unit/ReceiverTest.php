@@ -69,9 +69,8 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 	 * @return \WebChemistry\ThePay\Receiver
 	 */
 	protected function getReceiver($args = []) {
-		$extension = new \WebChemistry\ThePay\DI\ThePayExtension();
 		$request = new \Nette\Http\Request($this->getUrl($args));
-		$thePay = new \WebChemistry\ThePay\ThePay($extension->defaultValues, $request);
+		$thePay = new \WebChemistry\ThePay\ThePay([], $request);
 
 		return $thePay->getReceiver();
 	}
