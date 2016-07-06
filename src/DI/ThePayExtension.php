@@ -3,11 +3,12 @@
 namespace WebChemistry\ThePay\DI;
 
 use Nette\DI\CompilerExtension;
+use WebChemistry\ThePay\ThePay;
 
 class ThePayExtension extends CompilerExtension {
 
 	/** @var array */
-	public $defaultValues = array(
+	public $defaultValues = [
 		'merchantId' => 1,
 		'accountId' => 1,
 		'demoGateUrl' => 'https://www.thepay.cz/demo-gate/',
@@ -17,14 +18,14 @@ class ThePayExtension extends CompilerExtension {
 		'notificationTest' => 'https://www.thepay.cz/demo-gate/testNotif.php',
 		'password' => 'my$up3rsecr3tp4$$word',
 		'writer' => NULL
-	);
+	];
 
 	public function loadConfiguration() {
 		$config = $this->getConfig($this->defaultValues);
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('thepay'))
-			->setClass('WebChemistry\ThePay\ThePay', array($config));
+			->setClass(ThePay::class, [$config]);
 	}
 
 }
