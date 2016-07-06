@@ -2,18 +2,31 @@
 
 Integration of [payment gate thepay](https://www.thepay.cz/). This library **uses** their [component](https://www.thepay.cz/ke-stazeni/), version 3.0 (you can see in 'lib' directory)
 
-## Installation
+## Installation with Nette
 ```yaml
 extensions:
     thePay: WebChemistry\ThePay\DI\ThePayExtension
 ```
 
-## Configuration
+## Configuration with Nette
 ```yaml
 thePay:
     merchantId: 1
     accountId: 3
     password: myPassword
+```
+
+## Configuration without Nette
+
+```php
+
+$config = [
+    'merchantId' => 100,
+    'accountId' => 100,
+    'password' => 'pswd',
+    'dataApiPassword' => 'apiPswd'
+];
+$thepay = new WebChemistry\ThePay\ThePay($config);
 ```
 
 ## Display payment component
