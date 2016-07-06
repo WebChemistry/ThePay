@@ -10,7 +10,7 @@ class ThePayExtension extends CompilerExtension {
 	/** @var array */
 	public $defaultValues = [
 		'merchantId' => 1,
-		'accountId' => 1,
+		'accountId' => 3,
 		'password' => 'my$up3rsecr3tp4$$word',
 		'dataApiPassword' => 'my$up3rsecr3tp4$$word',
 		'writer' => NULL
