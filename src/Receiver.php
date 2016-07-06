@@ -88,7 +88,7 @@ class Receiver extends \TpReturnedPayment {
 	 */
 	public function getRemotePayment() {
 		if (!$this->remotePayment) {
-			$this->remotePayment = \TpDataApiHelper::getPayment($this->config, $this->getPaymentId())->getPayment();
+			$this->remotePayment = (new Api($this->config))->getPayment($this->getPaymentId());
 		}
 
 		return $this->remotePayment;
