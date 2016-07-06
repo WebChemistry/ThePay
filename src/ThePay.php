@@ -106,7 +106,7 @@ class ThePay {
 	public function getPermanent($merchantData, $description, $returnUrl) {
 		$payment = new \TpPermanentPayment($this->config, $merchantData, $description, $returnUrl);
 
-		return \TpPermanentPaymentHelper::getPermanentPayment($payment);
+		return new Permanent(\TpPermanentPaymentHelper::getPermanentPayment($payment));
 	}
 
 	/**
