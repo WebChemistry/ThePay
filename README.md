@@ -12,7 +12,7 @@ extensions:
 ```yaml
 thePay:
     merchantId: 1
-    accountId: 1
+    accountId: 3
     password: myPassword
 ```
 
@@ -52,10 +52,14 @@ if ($remotePayment) {
     $remotePayment->getValue(); // Price
 }
 
-$data = $receiver->getMerchantData();
-$row = $db->get($data['customer']);
-$row->successPayment();
-
-// We can get also additional info from their api
-$remotePayment = $receiver->getRemotePayment();
 ```
+
+## Permanent payments
+
+```php
+$payment = $thepay->createPermanent('merchantData', 'description', 'localhost/returnUrl.php');
+
+$payment->getMethods(); // Array of methods with payment information
+
+```
+
