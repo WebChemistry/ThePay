@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/WebChemistry/ThePay.svg?branch=master)](https://travis-ci.org/WebChemistry/ThePay)
 
-Integration of [payment gate thepay](https://www.thepay.cz/). This library **uses** their [component](https://www.thepay.cz/ke-stazeni/), version 3.0.2 (you can see in 'lib' directory)
+Integration of [payment gate thepay](https://www.thepay.cz/). This library **uses** their [component](https://www.thepay.cz/ke-stazeni/), version 3.2.2, 16.2.2017 (you can see in 'lib' directory)
 
 ## Installation with Nette
 ```yaml
