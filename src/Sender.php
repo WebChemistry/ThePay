@@ -2,14 +2,18 @@
 
 namespace WebChemistry\ThePay;
 
+use Nette\Utils\Strings;
+
 class Sender extends \TpPayment {
 
 	/**
 	 * @param \TpMerchantConfig $config
 	 * @param float $price
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(\TpMerchantConfig $config, $price) {
 		parent::__construct($config);
+
 		$this->setValue($price);
 	}
 
@@ -21,7 +25,7 @@ class Sender extends \TpPayment {
 	public function setValue($float) {
 		try {
 			parent::setValue($float);
-		} catch (\TpInvalidArgumentException $e) {
+		} catch (\TpInvalidParameterException $e) {
 			throw new InvalidArgumentException('Price must be float.');
 		}
 
@@ -29,17 +33,25 @@ class Sender extends \TpPayment {
 	}
 
 	/**
-	 * @param string|array|\Traversable $data
-	 * @return self
+	 * @param string $returnUrl
+	 * @throws InvalidArgumentException
 	 */
-	public function setCustomerData($data) {
-		parent::setCustomerData(Helper::setData($data));
-
-		return $this;
+	public function setReturnUrl($returnUrl) {
+		if (Strings::startsWith($returnUrl, 'http')) {
+			throw new InvalidArgumentException('Return url must be absolute.');
+		}
+		parent::setReturnUrl($returnUrl);
 	}
 
 	/**
-	 * @param string|array|\Traversable $data
+	 * @param array $data
+	 */
+	public function setMerchantDataArray(array $data) {
+		$this->setMerchantData(serialize($data));
+	}
+
+	/**
+	 * @param string $data
 	 * @return self
 	 */
 	public function setMerchantData($data) {
@@ -53,13 +65,6 @@ class Sender extends \TpPayment {
 	 */
 	public function getMerchantData() {
 		return Helper::getData(parent::getMerchantData());
-	}
-
-	/**
-	 * @return \TpIframeMerchantHelper
-	 */
-	public function createIframeRenderer() {
-		return new \TpIframeMerchantHelper($this);
 	}
 
 	/**

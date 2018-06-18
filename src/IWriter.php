@@ -15,6 +15,9 @@ interface IWriter {
 	 */
 	public function isExists();
 
+	/**
+	 * @return void
+	 */
 	public function write();
 
 }
