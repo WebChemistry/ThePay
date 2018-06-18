@@ -138,4 +138,12 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 		$this->assertFalse($receiver->getNeedConfirm());
 	}
 
+	public function testCheckValue() {
+		$this->getReceiver(['value' => 15.25])->checkValue(15.25);
+		$this->getReceiver(['value' => 15.25])->checkValue(12.25);
+		$this->assertThrowsWithMessage(\WebChemistry\ThePay\InvalidReceivedDataException::class, 'Value is below.', function () {
+			$this->getReceiver(['value' => 15.25])->checkValue(15.26);
+		});
+	}
+
 }

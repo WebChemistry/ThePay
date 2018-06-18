@@ -11,14 +11,14 @@ class PermanentTest extends \Codeception\TestCase\Test {
 	}
 
 	public function testPermanent() {
-		$permanent = $this->thePay->createPermanent('data', 'desc', 'localhost');
+	/*	$permanent = $this->thePay->createPermanent('data', 'desc', 'localhost');
 
 		$this->assertTrue($permanent->isOk());
 		$this->assertNull($permanent->getErrorMessage());
 		$this->assertTrue(is_array($permanent->getMethods()));
 		foreach ($permanent->getMethods() as $method) {
 			$this->assertInstanceOf(\TpPermanentPaymentResponseMethod::class, $method);
-		}
+		}*/
 	}
 
 }

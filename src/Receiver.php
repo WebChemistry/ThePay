@@ -51,6 +51,55 @@ class Receiver extends \TpReturnedPayment {
 	}
 
 	/**
+	 * @param float|null $minValue
+	 * @param array $needs
+	 * @throws ThePayThrowable
+	 * @return array
+	 */
+	public function fastCheckArray($minValue = null, array $needs = []) {
+		$this->fastCheck($minValue);
+
+		return $this->getMerchantDataArray($needs);
+	}
+
+	/**
+	 * @param float|null $minValue
+	 * @throws ThePayThrowable
+	 * @return array|string
+	 */
+	public function fastCheckString($minValue = null) {
+		$this->fastCheck($minValue);
+
+		return $this->getMerchantData();
+	}
+
+	/**
+	 * @param float|null $minValue
+	 * @throws ThePayThrowable
+	 * @return void
+	 */
+	protected function fastCheck($minValue = null) {
+		$this->verifySignature();
+
+		if (!$this->isSuccess()) {
+			throw new InvalidReceivedDataException('Payment is not successful.', InvalidReceivedDataException::NOT_SUCCESS);
+		}
+
+		$this->checkValue($minValue);
+	}
+
+	/**
+	 * @param float $minValue
+	 * @throws InvalidReceivedDataException
+	 */
+	public function checkValue($minValue) {
+		// precision 2 => the pay allows only 2 decimal places
+		if (round($this->getValue(), 2) < round($minValue, 2)) {
+			throw new InvalidReceivedDataException('Value is below.', InvalidReceivedDataException::VALUE_BELOW);
+		}
+	}
+
+	/**
 	 * @param bool $throwException
 	 * @throws ThePayException
 	 * @return bool
