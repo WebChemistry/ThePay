@@ -103,6 +103,29 @@ class Receiver extends \TpReturnedPayment {
 	}
 
 	/**
+	 * @param array $needs
+	 * @return array
+	 * @throws InvalidMerchantDataException
+	 */
+	public function getMerchantDataArray(array $needs = []) {
+		$data = @unserialize(parent::getMerchantData());
+		if ($data === false) {
+			throw new InvalidMerchantDataException('Merchant data is not array.');
+		}
+		$missing = [];
+		foreach ($needs as $need) {
+			if (!isset($data[$need])) {
+				$missing[] = $need;
+			}
+		}
+		if ($missing) {
+			InvalidMerchantDataException::missingItems($missing);
+		}
+
+		return $data;
+	}
+
+	/**
 	 * @return string|array
 	 */
 	public function getMerchantData() {

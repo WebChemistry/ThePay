@@ -2,4 +2,4 @@
 
 namespace WebChemistry\ThePay;
 
-class ThePayException extends \Exception {}
+class ThePayException extends \Exception implements ThePayThrowable {}

@@ -2,4 +2,4 @@
 
 namespace WebChemistry\ThePay;
 
-class InvalidArgumentException extends \Exception {}
+class InvalidArgumentException extends \Exception implements ThePayThrowable {}

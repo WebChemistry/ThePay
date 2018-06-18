@@ -4,10 +4,11 @@
 		"php": ">=5.5"
 	},
 	"require-dev": {
-		"codeception/codeception": "^2.1",
+		"codeception/codeception": "^2.3",
 		"nette/http": "^2.3",
 		"tracy/tracy": "^2.3",
-		"nette/di": "^2.3"
+		"nette/di": "^2.3",
+		"codeception/assert-throws": "^1.0"
 	},
 	"autoload": {
 		"classmap": [

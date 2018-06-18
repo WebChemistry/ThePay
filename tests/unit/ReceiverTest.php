@@ -2,6 +2,8 @@
 
 class ReceiverTest extends \Codeception\TestCase\Test {
 
+	use \Codeception\AssertThrows;
+
 	/**
 	 * @var \UnitTester
 	 */
@@ -115,8 +117,18 @@ class ReceiverTest extends \Codeception\TestCase\Test {
 		$data = $this->getReceiver(['merchantData' => 'test'])->getMerchantData();
 		$this->assertSame('test', $data);
 
-		$data = $this->getReceiver(['merchantData' => ['test']])->getMerchantData();
+		$data = $this->getReceiver(['merchantData' => ['test']])->getMerchantDataArray();
 		$this->assertSame(['test'], $data);
+
+		$data = $this->getReceiver(['merchantData' => ['foo' => 'bar', 'bar' => 'foo']])->getMerchantDataArray(['foo', 'bar']);
+		$this->assertSame(['foo' => 'bar', 'bar' => 'foo'], $data);
+
+		$this->assertThrowsWithMessage(\WebChemistry\ThePay\InvalidMerchantDataException::class, 'Merchant data is not array.', function () {
+			$this->getReceiver(['merchantData' => 'test'])->getMerchantDataArray();
+		});
+		$this->assertThrowsWithMessage(\WebChemistry\ThePay\InvalidMerchantDataException::class, 'Merchant data missing: bar.', function () {
+			$this->getReceiver(['merchantData' => ['foo' => 'bar']])->getMerchantDataArray(['bar', 'foo']);
+		});
 	}
 
 	public function testOtherParameters() {
