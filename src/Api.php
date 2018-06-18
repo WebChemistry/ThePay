@@ -17,6 +17,7 @@ class Api {
 	/**
 	 * @param bool $onlyActive
 	 * @return \TpDataApiGetPaymentMethodsResponse
+	 * @throws \TpSoapException
 	 */
 	public function getPaymentMethods($onlyActive = TRUE) {
 		return \TpDataApiHelper::getPaymentMethods($this->config, $onlyActive);
@@ -25,6 +26,7 @@ class Api {
 	/**
 	 * @param int $paymentId
 	 * @return null|\TpDataApiPayment
+	 * @throws \TpSoapException
 	 */
 	public function getPayment($paymentId) {
 		$response = \TpDataApiHelper::getPayment($this->config, $paymentId);
@@ -35,6 +37,7 @@ class Api {
 	/**
 	 * @param int $paymentId
 	 * @return null|\TpDataApiPaymentInfo
+	 * @throws \TpSoapException
 	 */
 	public function getPaymentInstructions($paymentId) {
 		$response = \TpDataApiHelper::getPaymentInstructions($this->config, $paymentId);
@@ -45,6 +48,7 @@ class Api {
 	/**
 	 * @param int $paymentId
 	 * @return int|null
+	 * @throws \TpSoapException
 	 */
 	public function getPaymentState($paymentId) {
 		$response = \TpDataApiHelper::getPaymentState($this->config, $paymentId);
@@ -59,6 +63,7 @@ class Api {
 	 * @param string $orderBy
 	 * @param string $orderByType
 	 * @return \TpDataApiGetPaymentsResponse
+	 * @throws \TpSoapException
 	 */
 	public function getPayments($itemsPerPage = NULL, $page = NULL, \TpDataApiGetPaymentsSearchParams $search = NULL, $orderBy = NULL, $orderByType = NULL) {
 		$pagination = NULL;

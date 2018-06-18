@@ -78,6 +78,7 @@ class ThePay {
 	/**
 	 * @param float $price
 	 * @return Sender
+	 * @throws InvalidArgumentException
 	 */
 	public function createSender($price) {
 		return new Sender($this->config, $price);

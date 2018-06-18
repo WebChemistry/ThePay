@@ -85,6 +85,7 @@ class Receiver extends \TpReturnedPayment {
 
 	/**
 	 * @return \TpDataApiPayment
+	 * @throws \TpSoapException
 	 */
 	public function getRemotePayment() {
 		if (!$this->remotePayment) {
