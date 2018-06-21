@@ -2,7 +2,7 @@
 
 namespace WebChemistry\ThePay;
 
-use Nette\Http\Request;
+use Nette\Http\IRequest;
 
 class ThePay {
 
@@ -23,7 +23,7 @@ class ThePay {
 	/** @var Receiver */
 	private $receiver;
 
-	/** @var Request */
+	/** @var IRequest */
 	private $request;
 
 	/** @var Api */
@@ -31,9 +31,9 @@ class ThePay {
 
 	/**
 	 * @param array $config
-	 * @param Request $request
+	 * @param IRequest $request
 	 */
-	public function __construct(array $config = [], Request $request = NULL) {
+	public function __construct(array $config = [], IRequest $request = NULL) {
 		$this->config = new \TpMerchantConfig;
 		if (isset($config['password']) && !isset($config['dataApiPassword'])) {
 			$config['dataApiPassword'] = $config['password'];

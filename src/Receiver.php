@@ -2,7 +2,7 @@
 
 namespace WebChemistry\ThePay;
 
-use Nette\Http\Request;
+use Nette\Http\IRequest;
 
 class Receiver extends \TpReturnedPayment {
 
@@ -18,9 +18,9 @@ class Receiver extends \TpReturnedPayment {
 	/**
 	 * @param \TpMerchantConfig $config
 	 * @param IWriter $writer
-	 * @param Request $request
+	 * @param IRequest $request
 	 */
-	public function __construct(\TpMerchantConfig $config, IWriter $writer = NULL, Request $request = NULL) {
+	public function __construct(\TpMerchantConfig $config, IWriter $writer = NULL, IRequest $request = NULL) {
 		try {
 			if ($request) {
 				parent::__construct($config, $request->getUrl()->getQueryParameters());
