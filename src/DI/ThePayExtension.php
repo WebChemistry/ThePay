@@ -17,11 +17,11 @@ class ThePayExtension extends CompilerExtension {
 	];
 
 	public function loadConfiguration() {
-		$config = $this->getConfig($this->defaultValues);
+		$config = $this->validateConfig($this->defaultValues);
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('thepay'))
-			->setClass(ThePay::class, [$config]);
+			->setFactory(ThePay::class, [$config]);
 	}
 
 }
