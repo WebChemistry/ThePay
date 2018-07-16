@@ -37,7 +37,7 @@ class Sender extends \TpPayment {
 	 * @throws InvalidArgumentException
 	 */
 	public function setReturnUrl($returnUrl) {
-		if (Strings::startsWith($returnUrl, 'http')) {
+		if (!Strings::startsWith($returnUrl, 'http')) {
 			throw new InvalidArgumentException('Return url must be absolute.');
 		}
 		parent::setReturnUrl($returnUrl);
