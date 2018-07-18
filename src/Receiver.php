@@ -80,12 +80,17 @@ class Receiver extends \TpReturnedPayment {
 	 */
 	protected function fastCheck($minValue = null) {
 		$this->verifySignature();
+		$this->checkSuccess();
+		$this->checkValue($minValue);
+	}
 
+	/**
+	 * @throws InvalidReceivedDataException
+	 */
+	public function checkSuccess(): void {
 		if (!$this->isSuccess()) {
 			throw new InvalidReceivedDataException('Payment is not successful.', InvalidReceivedDataException::NOT_SUCCESS);
 		}
-
-		$this->checkValue($minValue);
 	}
 
 	/**
